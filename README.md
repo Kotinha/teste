@@ -21,23 +21,15 @@ Initialize the database and start the server:
 python -m pms.app
 ```
 
-The application will create a `pms.db` SQLite file in the project directory.
+The application will create a `pms.db` SQLite file in the project directory and
+automatically populate nine default rooms if none exist.
 
-### Adding Rooms
+### Checking Available Rooms
 
-To add the initial 9 rooms run the following commands in a Python shell:
+Use the `/rooms/available` endpoint to list rooms free for a date range:
 
-```python
-from pms.models import init_db, SessionLocal
-from pms.models.room import Room
-
-init_db()
-session = SessionLocal()
-for i in range(1, 10):
-    room = Room(number=str(i), status='available', type='standard')
-    session.add(room)
-session.commit()
-session.close()
+```bash
+GET /rooms/available?check_in=2024-01-01&check_out=2024-01-05
 ```
 
 ## Project Structure
