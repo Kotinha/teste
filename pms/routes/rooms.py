@@ -1,13 +1,20 @@
+from datetime import datetime
+
 from flask import Blueprint, jsonify, request
 
 from ..models import SessionLocal
 from ..models.room import Room
+from ..models.reservation import Reservation
 
 bp = Blueprint('rooms', __name__, url_prefix='/rooms')
 
 
 def get_session():
     return SessionLocal()
+
+
+def parse_date(value):
+    return datetime.strptime(value, "%Y-%m-%d").date()
 
 
 @bp.route('/', methods=['GET'])
@@ -36,6 +43,30 @@ def create_room():
     result = dict(id=room.id, number=room.number, status=room.status, type=room.type)
     session.close()
     return jsonify(result), 201
+
+
+@bp.route('/available', methods=['GET'])
+def available_rooms():
+    """Return rooms free for the given dates."""
+    check_in = parse_date(request.args['check_in'])
+    check_out = parse_date(request.args['check_out'])
+
+    session = get_session()
+    conflicts = session.query(Reservation.room_id).filter(
+        Reservation.check_out > check_in,
+        Reservation.check_in < check_out,
+    )
+    rooms = (
+        session.query(Room)
+        .filter(~Room.id.in_(conflicts.subquery()))
+        .all()
+    )
+    data = [
+        dict(id=r.id, number=r.number, status=r.status, type=r.type)
+        for r in rooms
+    ]
+    session.close()
+    return jsonify(data)
 
 
 @bp.route('/<int:room_id>', methods=['PUT'])
