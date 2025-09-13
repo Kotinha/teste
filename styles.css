@@ -16,3 +16,8 @@ header, footer {
 main {
   padding: 1rem;
 }
+
+ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+}
