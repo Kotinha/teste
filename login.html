@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - JuntaPlay</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="scripts.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Login</h1>
+  </header>
+  <main>
+    <form id="loginForm" onsubmit="login(event)">
+      <label>Email:<br><input type="email" name="email" required /></label><br>
+      <label>Senha:<br><input type="password" name="senha" required /></label><br>
+      <button type="submit">Entrar</button>
+    </form>
+    <p><a href="recover.html">Esqueci minha senha</a></p>
+    <p>Não tem conta? <a href="register.html">Registre-se</a></p>
+  </main>
+</body>
+</html>

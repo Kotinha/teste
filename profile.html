@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil - JuntaPlay</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="scripts.js"></script>
+</head>
+<body onload="loadProfile()">
+  <header>
+    <h1>Perfil</h1>
+  </header>
+  <main>
+    <form id="profileForm" onsubmit="updateProfile(event)">
+      <label>Nome:<br><input type="text" name="nome" required /></label><br>
+      <label>Email:<br><input type="email" name="email" readonly /></label><br>
+      <label>Telefone:<br><input type="tel" name="telefone" required /></label><br>
+      <label>CPF:<br><input type="text" name="cpf" required /></label><br>
+      <fieldset>
+        <legend>Tipo de Usuário</legend>
+        <label><input type="checkbox" name="membro" /> Membro</label>
+        <label><input type="checkbox" name="administrador" /> Administrador</label>
+      </fieldset>
+      <label>Foto:<br><input type="file" name="foto" accept="image/*" /></label><br>
+      <img id="fotoPreview" alt="Pré-visualização" style="max-width:150px;display:block;" />
+      <button type="submit">Salvar</button>
+    </form>
+    <button onclick="logout()">Logout</button>
+  </main>
+</body>
+</html>

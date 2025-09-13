@@ -1,0 +1,8 @@
+{
+  "name": "juntaplay",
+  "version": "1.0.0",
+  "description": "Plataforma web de compartilhamento de assinaturas digitais.",
+  "scripts": {
+    "test": "echo 'Sem testes especificados' && exit 0"
+  }
+}
